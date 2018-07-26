@@ -44,7 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\APIRequestHandlers\APIBase.cs" />
+    <Compile Include="Core\APIRequestHandlers\FetchAll.cs" />
+    <Compile Include="Core\APIRequestHandlers\IAPIRequest.cs" />
     <Compile Include="Core\Configuration.cs" />
+    <Compile Include="Core\EmbeddedHTTP.cs" />
     <Compile Include="Core\TableLoader.cs" />
     <Compile Include="Core\UserProfileLoader.cs" />
     <Compile Include="Core\WoWProgressRequest.cs" />
@@ -55,6 +59,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\Артём\Source\Repos\NHttp\NHttp\NHttp.csproj">
+      <Project>{7ad9da80-afb9-43ea-bdf2-9b75c47dc2cc}</Project>
+      <Name>NHttp</Name>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

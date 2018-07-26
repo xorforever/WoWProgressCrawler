@@ -11,10 +11,14 @@ namespace WoWProgressCrawler
     {
         static void Main(string[] args)
         {
-            WoWProgressRequest r = new WoWProgressRequest();
-            var chr = r.LFGFetchPage(90);//r.LFGFetchAll();
-            Debug.WriteLine(chr.Count);
+            //WoWProgressRequest r = new WoWProgressRequest();
+            //var chr = r.LFGFetchPage(90);//
+            //var chr = r.LFGFetchAll();
+            //Debug.WriteLine(chr.Count);
+            var srv = new EmbeddedHTTP();
+            srv.Start();
             Console.ReadLine();
+            srv.Dispose();
         }
     }
 }
