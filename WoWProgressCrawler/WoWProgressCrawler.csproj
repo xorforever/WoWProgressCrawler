@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -43,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Configuration.cs" />
     <Compile Include="Core\TableLoader.cs" />
     <Compile Include="Core\UserProfileLoader.cs" />
     <Compile Include="Core\WoWProgressRequest.cs" />
