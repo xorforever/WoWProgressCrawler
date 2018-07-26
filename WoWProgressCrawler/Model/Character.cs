@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Runtime.Serialization;
 
 namespace WoWProgressCrawler.Model
 {
@@ -17,7 +15,7 @@ namespace WoWProgressCrawler.Model
 
         public override string ToString()
         {
-            return String.IsNullOrEmpty(Server)? Name : string.Format("{0}-{1}", Name, Guild);
+            return string.IsNullOrEmpty(Server)? Name : string.Format("{0}-{1}", Name, Guild);
         }
     }
 }

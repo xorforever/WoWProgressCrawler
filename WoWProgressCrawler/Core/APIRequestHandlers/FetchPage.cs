@@ -1,13 +1,14 @@
-﻿using System.Web.Script.Serialization;
+﻿using System;
+using System.Web.Script.Serialization;
 
 namespace WoWProgressCrawler.Core.APIRequestHandlers
 {
-    class FetchAll : IAPIRequest
+    class FetchPage : IAPIRequest
     {
-        public string Run(string[] In)
+        public string Run(string[] Args)
         {
             var _rq = new WoWProgressRequest();
-            var _rs = _rq.LFGFetchAll();
+            var _rs = _rq.LFGFetchPage(Convert.ToInt32(Args[2]));
             var json = new JavaScriptSerializer().Serialize(_rs);
             return json;
         }

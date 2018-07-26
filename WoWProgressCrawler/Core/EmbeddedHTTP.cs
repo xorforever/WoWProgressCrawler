@@ -6,6 +6,7 @@ using System.Net;
 using NHttp;
 using System.Configuration;
 using System.IO;
+using WoWProgressCrawler.Core.APIRequestHandlers;
 
 namespace WoWProgressCrawler.Core
 {
@@ -26,7 +27,11 @@ namespace WoWProgressCrawler.Core
         {
             using (var writer = new StreamWriter(e.Response.OutputStream))
             {
-                writer.Write("Hello world!");
+                string rs = String.Empty;
+                Console.WriteLine(e.Request.RawUrl);
+                APIBase b = new APIBase();
+                b.RunMethod(e.Request.RawUrl, ref rs);               
+                writer.Write(rs);
             }
         }
 
