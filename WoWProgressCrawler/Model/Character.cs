@@ -6,13 +6,20 @@ using System.Threading.Tasks;
 
 namespace WoWProgressCrawler.Model
 {
-    struct Character
+    public struct Character
     {
-        String Name;
-        String Guild;
-        String Raid; //wtf?
-        String Server;
-        String Itmlvl;
-        int Timestamp;
+        public string Name;
+        public string Guild;
+        public string Raid; //wtf?
+        public string Server;
+        public string Itmlvl;
+        public string WPRef;
+        public string Timestamp;
+        public int Timestamp_num;
+
+        public override string ToString()
+        {
+            return string.Format("{0}-{1}", Name, Guild);
+        }
     }
 }

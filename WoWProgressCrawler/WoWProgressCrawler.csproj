@@ -43,8 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AjaxGetter.cs" />
     <Compile Include="Core\TableLoader.cs" />
+    <Compile Include="Core\UserProfileLoader.cs" />
     <Compile Include="Core\WoWProgressRequest.cs" />
     <Compile Include="Model\Character.cs" />
     <Compile Include="Model\RankingTable.cs" />
