@@ -63,7 +63,7 @@ namespace WoWProgressCrawler.Core
                     Timestamp = Regex.Replace(fields[5], tag_pattern, string.Empty),
                     Timestamp_num = Convert.ToInt32(Regex.Match(fields[5], ts_pattern).Value.Split(new char[] { '=' })[1].Replace("\"", string.Empty))
                 };
-                Console.WriteLine(chr.Name);
+                //Console.WriteLine(chr.Name);
                 chars.Add(chr);
                 fields.Clear();
             }

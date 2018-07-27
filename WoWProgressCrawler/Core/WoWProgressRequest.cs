@@ -36,7 +36,7 @@ namespace WoWProgressCrawler.Core
                 w.Headers.Add(h_ContentType);
                 while (HasData)
                 {
-                    Console.WriteLine(Index);
+                    //Console.Write(Index+" ");
                     Raw = w.UploadString(String.Format(NextPage, Index), RQ);
                     if (Raw.Length == 0)
                     {

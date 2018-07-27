@@ -11,9 +11,9 @@ namespace WoWProgressCrawler.Core.Cache
             _c = MemoryCache.Default;
         }
 
-        public static void PutObject(string s, object o)
+        public static void PutObject(string s, object o, double l)
         {
-            _c.Set(s, o, System.DateTimeOffset.Now.AddMinutes(10.0));
+            _c.Set(s, o, System.DateTimeOffset.Now.AddSeconds(l));
         }
 
         public static bool ObjectExist(string key)

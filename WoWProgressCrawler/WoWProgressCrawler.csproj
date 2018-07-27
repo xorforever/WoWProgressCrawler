@@ -57,6 +57,7 @@
     <Compile Include="Core\UserProfileLoader.cs" />
     <Compile Include="Core\WoWProgressRequest.cs" />
     <Compile Include="Model\Character.cs" />
+    <Compile Include="Model\LFGFetchAllData.cs" />
     <Compile Include="Model\RankingTable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

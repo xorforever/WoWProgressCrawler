@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Net;
-using System.Text.RegularExpressions;
-using System.Xml;
 using WoWProgressCrawler.Core;
+using WoWProgressCrawler.Core.APIRequestHandlers;
+using WoWProgressCrawler.Model;
 
 namespace WoWProgressCrawler
 {
@@ -16,6 +14,7 @@ namespace WoWProgressCrawler
             //var chr = r.LFGFetchAll();
             //Debug.WriteLine(chr.Count);
             Core.Cache.Cache.InitCache();
+            //FetchAll.Data.Updating = ListState.UPDATED;
             var srv = new EmbeddedHTTP();
             srv.Start();
             Console.ReadLine();
