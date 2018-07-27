@@ -15,6 +15,7 @@ namespace WoWProgressCrawler
             //var chr = r.LFGFetchPage(90);//
             //var chr = r.LFGFetchAll();
             //Debug.WriteLine(chr.Count);
+            Core.Cache.Cache.InitCache();
             var srv = new EmbeddedHTTP();
             srv.Start();
             Console.ReadLine();

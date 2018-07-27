@@ -15,7 +15,7 @@ namespace WoWProgressCrawler.Model
 
         public override string ToString()
         {
-            return string.IsNullOrEmpty(Server)? Name : string.Format("{0}-{1}", Name, Guild);
+            return string.IsNullOrEmpty(Guild) ? Name : string.Format("{0}-{1}", Name, Guild);
         }
     }
 }

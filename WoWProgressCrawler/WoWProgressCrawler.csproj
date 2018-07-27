@@ -36,6 +36,7 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -49,6 +50,7 @@
     <Compile Include="Core\APIRequestHandlers\FetchAll.cs" />
     <Compile Include="Core\APIRequestHandlers\FetchPage.cs" />
     <Compile Include="Core\APIRequestHandlers\IAPIRequest.cs" />
+    <Compile Include="Core\Cache\Cache.cs" />
     <Compile Include="Core\Configuration.cs" />
     <Compile Include="Core\EmbeddedHTTP.cs" />
     <Compile Include="Core\TableLoader.cs" />
