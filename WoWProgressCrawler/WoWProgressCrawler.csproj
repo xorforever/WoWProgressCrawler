@@ -66,13 +66,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="C:\Users\Артём\Source\Repos\NHttp\NHttp\NHttp.csproj">
-      <Project>{7ad9da80-afb9-43ea-bdf2-9b75c47dc2cc}</Project>
-      <Name>NHttp</Name>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
