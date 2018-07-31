@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Net;
 using NHttp;
 using System.Configuration;
-using System.IO;
 using WoWProgressCrawler.Core.APIRequestHandlers;
 
 namespace WoWProgressCrawler.Core
@@ -18,20 +14,24 @@ namespace WoWProgressCrawler.Core
         {
             server = new HttpServer();
             server.EndPoint = new IPEndPoint
-                (IPAddress.Parse(ConfigurationManager.AppSettings.Get("EmbededHTTP_ListenAddr")),
-                Convert.ToInt32(ConfigurationManager.AppSettings.Get("EmbededHTTP_ListenPort")));
+                (IPAddress.Parse(ConfigurationManager.AppSettings.Get("EmbeddedHTTP_ListenAddr")),
+                Convert.ToInt32(ConfigurationManager.AppSettings.Get("EmbeddedHTTP_ListenPort")));
             server.RequestReceived += Server_RequestReceived;
         }
 
         private void Server_RequestReceived(object sender, HttpRequestEventArgs e)
         {
-            using (var writer = new StreamWriter(e.Response.OutputStream))
+            APIBase b = new APIBase();
+            try
             {
-                string rs = String.Empty;
-                Console.WriteLine(e.Request.RawUrl);
-                APIBase b = new APIBase();
-                b.RunMethod(e.Request.RawUrl, ref rs);               
-                writer.Write(rs);
+                b.RunMethod(e.Request.RawUrl, e);
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.Source);
+                Console.WriteLine(ex.StackTrace);
             }
         }
 

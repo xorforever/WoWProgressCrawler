@@ -15,15 +15,15 @@ namespace WoWProgressCrawler.Core
         private static string chref_pattern = "href=\"(.*?)\"";
         private static string ts_pattern = "data-ts=\"(.*?)\"";
 
-        private static string TableRegEx = ConfigurationManager.AppSettings.Get("TableRegEx");
-        private static string ShittySelectRegEx = ConfigurationManager.AppSettings.Get("ShittySelectRegEx");
-        //private static string TableRegEx = "<table class=\"rating.*>(.*)</table>";
-        //private static string ShittySelectRegEx = "<select.*>(.*)</select>";
+        //private static string TableRegEx = ConfigurationManager.AppSettings.Get("TableRegEx");
+        //private static string ShittySelectRegEx = ConfigurationManager.AppSettings.Get("ShittySelectRegEx");
+        private static string TableRegEx = "<table class=\"rating.*>(.*)</table>";
+        private static string ShittySelectRegEx = "<select.*>(.*)</select>";
 
         private static String FilterTableData(String Data)
         {
             Data = Regex.Match(Data, TableRegEx).Value;
-            Data = Regex.Replace(Data, ShittySelectRegEx, String.Empty);
+            //Data = Regex.Replace(Data, ShittySelectRegEx, String.Empty);
             Data = Data.Replace("&nbsp;", String.Empty);
             //.Replace(String., String.Empty)
             //.Replace("</value>", "</option>")

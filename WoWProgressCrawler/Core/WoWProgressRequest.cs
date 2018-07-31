@@ -34,9 +34,11 @@ namespace WoWProgressCrawler.Core
                 int Index = 0;
 
                 w.Headers.Add(h_ContentType);
+
+                Console.WriteLine();
                 while (HasData)
                 {
-                    //Console.Write(Index+" ");
+                    Console.Write(Index+" ");
                     Raw = w.UploadString(String.Format(NextPage, Index), RQ);
                     if (Raw.Length == 0)
                     {
@@ -46,6 +48,7 @@ namespace WoWProgressCrawler.Core
                     lfg.AddRange(TableLoader.ReadTableData(Raw));
                     Index++;
                 }
+                Console.WriteLine();
                 return lfg;
             }
         }

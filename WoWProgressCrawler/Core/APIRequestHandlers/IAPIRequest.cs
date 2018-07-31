@@ -1,7 +1,9 @@
-﻿namespace WoWProgressCrawler.Core.APIRequestHandlers
+﻿using NHttp;
+
+namespace WoWProgressCrawler.Core.APIRequestHandlers
 {
     interface IAPIRequest
     {
-        string Run(string[] Args);
+        void Run(string[] Args, HttpRequestEventArgs e);
     }
 }
