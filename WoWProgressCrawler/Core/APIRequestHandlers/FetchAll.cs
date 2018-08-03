@@ -26,42 +26,38 @@ namespace WoWProgressCrawler.Core.APIRequestHandlers
         {
             using (var writer = new StreamWriter(e.Response.OutputStream))
             {
-                var _rs = FetchAll.Data;
-
                 if (Cache.Cache.ObjectExist(cached_name))
                 {
-                    _rs = (LFGFetchAllData)Cache.Cache.GetObject(cached_name);
+                    var _rs = (LFGFetchAllData)Cache.Cache.GetObject(cached_name);
+                    writer.Write(new JavaScriptSerializer().Serialize(_rs));
                 }
                 else
                 {
-                    _rs = FetchAll.Data;
-
+                    writer.Write(new JavaScriptSerializer().Serialize(FetchAll.Data));
                     ThreadPool.QueueUserWorkItem(o => UpdateJob());
                 }
-
-                writer.Write(new JavaScriptSerializer().Serialize(_rs));
             }
         }
 
         private static void UpdateJob()
         {
             if (FetchAll.Data.Updating == ListState.UPDATING) return;
-            Console.WriteLine("Update call job start");
+            Console.WriteLine("Update job start");
             FetchAll.Data.Updating = ListState.UPDATING;
-            FetchAll.Data.LastUpdated = DateTime.Now;
             FetchAll.Data.Characters = LFGFetchAll();
+            FetchAll.Data.LastUpdated = Util.ToUnixTime(DateTime.UtcNow);
             FetchAll.Data.Updating = ListState.UPDATED;
             Cache.Cache.PutObject(cached_name, FetchAll.Data, LifeTime);
-            Console.WriteLine("Update call job completed");
+            Console.WriteLine("Update job completed");
         }
 
         private static List<Character> LFGFetchAll()
         {
             using (var w = new WebClient())
             {
+                string Raw;
                 List<Character> lfg = new List<Character>();
                 w.Encoding = System.Text.Encoding.UTF8;
-                String Raw;
 
                 //Download first page
                 w.Headers.Add(h_UserAgent);
@@ -78,7 +74,7 @@ namespace WoWProgressCrawler.Core.APIRequestHandlers
                 while (HasData)
                 {
                     Console.Write(Index + " ");
-                    Raw = w.UploadString(String.Format(NextPage, Index), RQ);
+                    Raw = w.UploadString(string.Format(NextPage, Index), RQ);
                     if (Raw.Length == 0)
                     {
                         HasData = false;

@@ -3,6 +3,8 @@ using System.Net;
 using NHttp;
 using System.Configuration;
 using WoWProgressCrawler.Core.APIRequestHandlers;
+using System.IO;
+using System.Web.Script.Serialization;
 
 namespace WoWProgressCrawler.Core
 {
@@ -24,7 +26,7 @@ namespace WoWProgressCrawler.Core
             APIBase b = new APIBase();
             try
             {
-                b.RunMethod(e.Request.RawUrl, e);
+                b.RunMethod(e);
             }
 
             catch (Exception ex)

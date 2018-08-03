@@ -9,22 +9,20 @@ namespace WoWProgressCrawler.Core
 {
     class TableLoader
     {
-        private static string tr_pattern = "<tr>(.*?)</tr>";
-        private static string td_pattern = "<td.*?>(.*?)</td>";
-        private static string tag_pattern = "<(.*?)>";
-        private static string chref_pattern = "href=\"(.*?)\"";
-        private static string ts_pattern = "data-ts=\"(.*?)\"";
+        private static readonly string tr_pattern = "<tr>(.*?)</tr>";
+        private static readonly string td_pattern = "<td.*?>(.*?)</td>";
+        private static readonly string tag_pattern = "<(.*?)>";
+        private static readonly string chref_pattern = "href=\"(.*?)\"";
+        private static readonly string ts_pattern = "data-ts=\"(.*?)\"";
 
-        //private static string TableRegEx = ConfigurationManager.AppSettings.Get("TableRegEx");
-        //private static string ShittySelectRegEx = ConfigurationManager.AppSettings.Get("ShittySelectRegEx");
-        private static string TableRegEx = "<table class=\"rating.*>(.*)</table>";
-        private static string ShittySelectRegEx = "<select.*>(.*)</select>";
+        private static readonly string TableRegEx = "<table class=\"rating.*>(.*)</table>";
+        private static readonly string ShittySelectRegEx = "<select.*>(.*)</select>";
 
-        private static String FilterTableData(String Data)
+        private static string FilterHTMLeData(string Data)
         {
+            Data = Data.Replace("&nbsp;", string.Empty);
             Data = Regex.Match(Data, TableRegEx).Value;
             //Data = Regex.Replace(Data, ShittySelectRegEx, String.Empty);
-            Data = Data.Replace("&nbsp;", String.Empty);
             //.Replace(String., String.Empty)
             //.Replace("</value>", "</option>")
             //.Replace("<th></th></tr>", "<th></th>");
@@ -33,39 +31,26 @@ namespace WoWProgressCrawler.Core
 
         public static List<Character> ReadTableData(string Data)
         {         
-            Character chr;
-
             List<Character> chars = new List<Character>();
 
-            List<string> fields = new List<string>();
-
-            Data = FilterTableData(Data);
+            Data = FilterHTMLeData(Data);
             MatchCollection rows = Regex.Matches(Data, tr_pattern);
 
             foreach (Match row in rows)
             {
                 MatchCollection cols = Regex.Matches(row.Value, td_pattern);
-                foreach (Match col in cols)
-                {
-                    //Name//Guild//Raid//Srv//ItmLvl//LastUpd
-                    fields.Add(col.Value);
-                }
 
-                //Make character struct
-                chr = new Character()
+                chars.Add(new Character()
                 {
-                    Name = Regex.Replace(fields[0], tag_pattern, string.Empty),
-                    Guild = Regex.Replace(fields[1], tag_pattern, string.Empty),
-                    Raid = Regex.Replace(fields[2], tag_pattern, string.Empty),
-                    Server = Regex.Replace(fields[3], tag_pattern, string.Empty),
-                    Itmlvl = Regex.Replace(fields[4], tag_pattern, string.Empty),
-                    WPRef = Regex.Match(fields[0], chref_pattern).Value.Split(new char[] { '=' })[1].Replace("\"", string.Empty),
-                    Timestamp = Regex.Replace(fields[5], tag_pattern, string.Empty),
-                    Timestamp_num = Convert.ToInt32(Regex.Match(fields[5], ts_pattern).Value.Split(new char[] { '=' })[1].Replace("\"", string.Empty))
-                };
-                //Console.WriteLine(chr.Name);
-                chars.Add(chr);
-                fields.Clear();
+                    Name = Regex.Replace(cols[0].Value, tag_pattern, string.Empty),
+                    Guild = Regex.Replace(cols[1].Value, tag_pattern, string.Empty),
+                    Raid = Regex.Replace(cols[2].Value, tag_pattern, string.Empty),
+                    Server = Regex.Replace(cols[3].Value, tag_pattern, string.Empty),
+                    Itmlvl = Regex.Replace(cols[4].Value, tag_pattern, string.Empty),
+                    WPRef = Regex.Match(cols[0].Value, chref_pattern).Value.Split(new char[] { '=' })[1].Replace("\"", string.Empty),
+                    Timestamp = Regex.Replace(cols[5].Value, tag_pattern, string.Empty),
+                    Timestamp_num = Convert.ToInt64(Regex.Match(cols[5].Value, ts_pattern).Value.Split(new char[] { '=' })[1].Replace("\"", string.Empty))
+                });
             }
             return chars;
         }

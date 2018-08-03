@@ -20,20 +20,17 @@ namespace WoWProgressCrawler.Core.APIRequestHandlers
             else
             {
                 using (var file = File.Open(ConfigurationManager.AppSettings.Get("EmbeddedHTTP_Favicon"), FileMode.Open))
+                using (var sr = new BinaryReader(file))
                 {
-                    using (var sr = new BinaryReader(file))
-                    {
-                        byte[] data = sr.ReadBytes((int)file.Length);
-                        Cache.Cache.PutObject(cached_name, data, LifeTime);
+                    byte[] data = sr.ReadBytes((int)file.Length);
+                    Cache.Cache.PutObject(cached_name, data, LifeTime);
 
-                        e.Response.ContentType = "image/x-icon";
-                        e.Response.OutputStream.Write(data, 0, data.Length);
-                        sr.Close();
-                    }
+                    e.Response.ContentType = "image/x-icon";
+                    e.Response.OutputStream.Write(data, 0, data.Length);
+                    sr.Close();
                     file.Close();
                 }
             }
-
         }
     }
 }

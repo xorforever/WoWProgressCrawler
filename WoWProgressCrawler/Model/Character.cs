@@ -11,7 +11,7 @@ namespace WoWProgressCrawler.Model
         public string Itmlvl;
         public string WPRef;
         public string Timestamp;
-        public int Timestamp_num;
+        public long Timestamp_num;
 
         public override string ToString()
         {

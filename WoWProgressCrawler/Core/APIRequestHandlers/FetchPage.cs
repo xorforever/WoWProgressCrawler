@@ -23,7 +23,8 @@ namespace WoWProgressCrawler.Core.APIRequestHandlers
         {
             using (var writer = new StreamWriter(e.Response.OutputStream))
             {
-                var _page = Convert.ToInt32(Args[2]);              
+                var _page = Convert.ToInt32(Args[2]);
+                _page = _page - 2;         
                 
                 string cached_name = string.Format(FetchPage.cached_name, _page);
 
@@ -38,7 +39,6 @@ namespace WoWProgressCrawler.Core.APIRequestHandlers
                     Cache.Cache.PutObject(cached_name, _rs, LifeTime);
                     writer.Write(new JavaScriptSerializer().Serialize(_rs));
                 }
-
             }
         }
 
@@ -46,9 +46,9 @@ namespace WoWProgressCrawler.Core.APIRequestHandlers
         {
             using (var w = new WebClient())
             {
-                w.Encoding = System.Text.Encoding.UTF8;
-                String Raw;
+                string Raw;
 
+                w.Encoding = System.Text.Encoding.UTF8;
                 w.Headers.Add(h_UserAgent);
 
                 if (Index == -1)
@@ -58,7 +58,7 @@ namespace WoWProgressCrawler.Core.APIRequestHandlers
                 }
                 else
                 {
-                    Raw = w.UploadString(String.Format(NextPage, Index), RQ);
+                    Raw = w.UploadString(string.Format(NextPage, Index), RQ);
                     return TableLoader.ReadTableData(Raw);
                 }
             }

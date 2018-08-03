@@ -9,7 +9,7 @@ namespace WoWProgressCrawler.Model
     public struct LFGFetchAllData
     {
         public ListState Updating;
-        public DateTime LastUpdated;
+        public long LastUpdated;
         public List<Character> Characters;
     }
 
